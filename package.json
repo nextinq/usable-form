@@ -1,0 +1,61 @@
+{
+  "name": "use-form",
+  "version": "0.1.0",
+  "description": "React form library built on react-hooks",
+  "main": "index.js",
+  "repository": "git@github.com:jkaramon/use-form.git",
+  "author": "Josef Karamon <josef.karamon@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-transform-flow-strip-types": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-flowtype": "^3.8.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jest": "^22.5.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "flow-bin": "^0.98.1",
+    "flow-typed": "^2.5.1",
+    "husky": ">=1",
+    "jest": "^24.8.0",
+    "lint-staged": ">=8",
+    "prettier": "1.17.0",
+    "rollup": "^1.11.3",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-cpy": "^1.1.0",
+    "rollup-plugin-flow": "^1.1.1"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "test": "yarn jest src",
+    "test:watch": "yarn jest src --watch --notify",
+    "lint": "eslint src",
+    "build": "yarn clean && yarn rollup -c",
+    "precommit": "lint-staged && yarn flow && yarn lint && yarn test",
+    "prepublishOnly": "yarn clean && yarn lint && yarn test && yarn build"
+  },
+  "engines": {
+    "node": ">= 8.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "peerDependencies": {
+    "react": "^16.8.6"
+  }
+}
