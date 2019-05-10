@@ -1,6 +1,6 @@
 // @flow
 
-import type { InputErrorProps, ValidationError } from './types';
+import type { ValidationError } from './types';
 
 export function getInputError(
   fieldName: string,
@@ -25,12 +25,12 @@ export function isInputTouched(
 export function mapInputError(
   fieldName: string,
   errors: Array<ValidationError>
-): InputErrorProps {
+): ValidationError {
   const inputError = getInputError(fieldName, errors);
   return {
-    source: inputError && inputError.source,
-    code: inputError && inputError.code,
-    severity: inputError && inputError.severity,
-    message: inputError && inputError.message
+    source: (inputError && inputError.source) || '',
+    code: (inputError && inputError.code) || '',
+    severity: (inputError && inputError.severity) || 'Error',
+    message: (inputError && inputError.message) || ''
   };
 }
