@@ -2,7 +2,10 @@
   "name": "use-form",
   "version": "0.1.0",
   "description": "React form library built on react-hooks",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib/**"
+  ],
   "repository": "git@github.com:jkaramon/use-form.git",
   "author": "Josef Karamon <josef.karamon@gmail.com>",
   "license": "MIT",
@@ -23,6 +26,7 @@
     "eslint-plugin-jest": "^22.5.1",
     "eslint-plugin-prettier": "^3.0.1",
     "flow-bin": "^0.98.1",
+    "flow-copy-source": "^2.0.4",
     "flow-typed": "^2.5.1",
     "husky": ">=1",
     "jest": "^24.8.0",
@@ -30,7 +34,6 @@
     "prettier": "1.17.0",
     "rollup": "^1.11.3",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-cpy": "^1.1.0",
     "rollup-plugin-flow": "^1.1.1"
   },
   "scripts": {
@@ -38,7 +41,8 @@
     "test": "yarn jest src",
     "test:watch": "yarn jest src --watch --notify",
     "lint": "eslint src",
-    "build": "yarn clean && yarn rollup -c",
+    "build:copy-flow": "yarn run flow-copy-source --ignore '**/__tests__/**' ./src ./lib",
+    "build": "yarn clean && yarn rollup -c && yarn build:copy-flow",
     "precommit": "lint-staged && yarn flow && yarn lint && yarn test",
     "prepublishOnly": "yarn clean && yarn lint && yarn test && yarn build",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"

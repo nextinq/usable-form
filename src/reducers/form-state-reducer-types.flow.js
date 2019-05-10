@@ -1,6 +1,6 @@
 // @flow
 
-import type { ValidationError } from './types.flow';
+import type { ValidationError } from '../types';
 
 export type FormStateActionFormValidated = {
   type: 'form-validated',

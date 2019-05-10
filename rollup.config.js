@@ -1,7 +1,6 @@
 /* eslint-disable */
 // plugins that we are going to use
 import babel from 'rollup-plugin-babel';
-import copy from 'rollup-plugin-cpy';
 import flow from 'rollup-plugin-flow';
 
 // list of plugins used during building process
@@ -11,11 +10,6 @@ const plugins = targets => [
   // use Babel to transpile to ES5
   babel({
     exclude: 'node_modules/**'
-  }),
-  // copy Flow definitions from source to destination directory
-  copy({
-    files: ['src/**/*.flow.js'],
-    dest: 'lib'
   })
 ];
 
@@ -31,9 +25,9 @@ export default [
       // name visible for other scripts
       name: 'npmLibPackageExample',
       // output file location
-      file: 'lib/index.esm.js',
+      file: './lib/index.js',
       // format of generated JS file, also: esm, and others are available
-      format: 'esm',
+      format: 'cjs',
       // add sourcemaps
       sourcemap: true
     },

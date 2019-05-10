@@ -1,6 +1,6 @@
 // @flow
 
-import type { FormValues } from './types.flow';
+import type { FormValues } from '../types';
 
 export type FormValuesActionSetFieldValue = {
   type: 'set-field-value',

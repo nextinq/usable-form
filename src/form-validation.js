@@ -1,6 +1,6 @@
 // @flow
 
-import type { InputErrorProps, ValidationError } from './types.flow';
+import type { InputErrorProps, ValidationError } from './types';
 
 export function getInputError(
   fieldName: string,

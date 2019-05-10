@@ -1,8 +1,8 @@
 // @flow
 
-import type { FormStateReducer } from '../types.flow';
+import type { FormStateReducer } from '../types';
 import { appendUniq } from '../utils/append-uniq';
-import type { FormStateReducerActions } from '../types-form-state-reducer-actions.flow';
+import type { FormStateReducerActions } from './form-state-reducer-types.flow';
 
 export const initialFormState: FormStateReducer = {
   touched: [],

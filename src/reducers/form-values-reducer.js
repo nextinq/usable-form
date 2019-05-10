@@ -1,7 +1,7 @@
 // @flow
 
-import type { FormValues } from '../types.flow';
-import type { FormValuesReducerActions } from '../types-form-values-reducer-actions.flow';
+import type { FormValues } from '../types';
+import type { FormValuesReducerActions } from './form-values-reducer-types.flow';
 
 export function formValuesReducer(
   state: FormValues,

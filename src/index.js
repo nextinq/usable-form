@@ -4,10 +4,12 @@ import { useReducer } from 'react';
 
 import { isInputTouched, mapInputError } from './form-validation';
 import { formValuesReducer } from './reducers/form-values-reducer';
+
 import {
   formStateReducer,
   initialFormState
 } from './reducers/form-state-reducer';
+
 import type {
   DispatchFn,
   FormStateReducer,
@@ -15,7 +17,15 @@ import type {
   InitUseFormOptions,
   UseFormOptions,
   ValidationError
-} from './types.flow';
+} from './types';
+
+export type {
+  UseFormResult,
+  UseFormOptions,
+  InitUseFormOptions,
+  FormValues,
+  FormState
+} from './types';
 
 const initOpts: InitUseFormOptions = {
   schemaValidator: null
@@ -47,7 +57,7 @@ export function useForm(options: UseFormOptions) {
   const runValidation = (fieldName, values: FormValues) => {
     dispatchFormState({ type: 'field-touched', payload: { fieldName } });
     if (opts.validateForm) {
-      const errors = options.validateForm(values, fieldName);
+      const errors = opts.validateForm(values, fieldName);
       dispatchFormState({
         type: 'form-validated',
         payload: { errors: errors || [] }

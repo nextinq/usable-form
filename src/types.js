@@ -24,7 +24,7 @@ export type FormStateReducer = {
 };
 
 export type FormValues = {
-  [string]: mixed
+  [string]: any
 };
 
 export type FormState = FormStateReducer & {
@@ -54,9 +54,9 @@ export type InitUseFormOptions = {
 };
 
 export type UseFormOptions = {
-  initialValues: FormValues,
-  validationSchema: Object,
-  validateForm: (
+  initialValues?: FormValues,
+  validationSchema?: Object,
+  validateForm?: (
     formValues: FormValues,
     fieldName: string
   ) => Array<ValidationError>
