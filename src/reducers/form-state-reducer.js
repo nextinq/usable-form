@@ -17,21 +17,19 @@ export function formStateReducer(
   action: FormStateReducerActions
 ): FormStateReducer {
   switch (action.type) {
-    case 'form-validated': {
-      const { errors } = action.payload;
-      return { ...state, isValid: isValid(errors), errors };
-    }
     case 'field-touched': {
       const { fieldName } = action.payload;
       return { ...state, touched: appendUniq(fieldName, state.touched) };
     }
     case 'set-form-errors': {
-      const { errors } = action.payload;
-      const touched = errors.map(err => err.source);
+      const { errors, touchFields } = action.payload;
+      const touched = touchFields
+        ? errors.map(err => err.source)
+        : state.touched;
       return { ...state, errors, isValid: isValid(errors), touched };
     }
     default: {
-      throw new Error(`Unknown action ${action.type}`);
+      throw new Error(`Unknown action: ${action.type}`);
     }
   }
 }

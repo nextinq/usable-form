@@ -32,7 +32,7 @@ export type SetupFieldResult = {
 };
 
 export type SetupWrapperResult = {
-  error?: ValidationError,
+  error?: ?ValidationError,
   touched?: boolean,
   locPrefix?: string,
   label: string

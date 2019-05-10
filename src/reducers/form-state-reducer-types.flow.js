@@ -2,13 +2,6 @@
 
 import type { ValidationError } from '../types';
 
-export type FormStateActionFormValidated = {
-  type: 'form-validated',
-  payload: {
-    errors: Array<ValidationError>
-  }
-};
-
 export type FormStateActionFieldTouched = {
   type: 'field-touched',
   payload: {
@@ -19,11 +12,11 @@ export type FormStateActionFieldTouched = {
 export type FormStateActionSetFormErrors = {
   type: 'set-form-errors',
   payload: {
-    errors: Array<ValidationError>
+    errors: Array<ValidationError>,
+    touchFields: boolean
   }
 };
 
 export type FormStateReducerActions =
-  | FormStateActionFormValidated
   | FormStateActionFieldTouched
   | FormStateActionSetFormErrors;

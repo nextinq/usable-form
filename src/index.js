@@ -2,7 +2,7 @@
 // eslint-disable-next-line import/no-unresolved
 import { useReducer } from 'react';
 
-import { isInputTouched, mapInputError } from './form-validation';
+import { getInputError, isInputTouched } from './utils/form-validation';
 import { formValuesReducer } from './reducers/form-values-reducer';
 
 import {
@@ -56,15 +56,24 @@ export function useForm(options: UseFormOptions) {
 
   const runValidation = (fieldName, values: FormValues) => {
     dispatchFormState({ type: 'field-touched', payload: { fieldName } });
-    if (opts.validateForm) {
-      const errors = opts.validateForm(values, fieldName);
+    const { validateForm, validationSchema } = opts;
+    if (validateForm) {
+      const errors = validateForm(values, fieldName);
       dispatchFormState({
-        type: 'form-validated',
-        payload: { errors: errors || [] }
+        type: 'set-form-errors',
+        payload: { errors: errors || [], touchFields: false }
       });
     }
-    if (opts.validationSchema && initOpts.schemaValidator) {
-      initOpts.schemaValidator(opts.validationSchema, values, fieldName);
+    if (validationSchema && initOpts.schemaValidator) {
+      const errors = initOpts.schemaValidator(
+        validationSchema,
+        values,
+        fieldName
+      );
+      dispatchFormState({
+        type: 'set-form-errors',
+        payload: { errors: errors || [], touchFields: false }
+      });
     }
   };
 
@@ -96,7 +105,7 @@ export function useForm(options: UseFormOptions) {
   };
   const setupWrapper = (fieldName: string, locPrefix?: string) => {
     return {
-      error: mapInputError(fieldName, formState.errors),
+      error: getInputError(fieldName, formState.errors),
       touched: isInputTouched(fieldName, formState.touched),
       locPrefix,
       label: fieldName
@@ -104,7 +113,10 @@ export function useForm(options: UseFormOptions) {
   };
 
   const setFormErrors = (errors: Array<ValidationError>) => {
-    dispatchFormState({ type: 'set-form-errors', payload: { errors } });
+    dispatchFormState({
+      type: 'set-form-errors',
+      payload: { errors: errors || [], touchFields: true }
+    });
   };
 
   const setValues = (values: Object) => {
