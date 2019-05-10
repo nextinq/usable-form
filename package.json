@@ -14,6 +14,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
     "babel-plugin-external-helpers": "^6.22.0",
+    "coveralls": "^3.0.3",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.2.0",
@@ -39,7 +40,8 @@
     "lint": "eslint src",
     "build": "yarn clean && yarn rollup -c",
     "precommit": "lint-staged && yarn flow && yarn lint && yarn test",
-    "prepublishOnly": "yarn clean && yarn lint && yarn test && yarn build"
+    "prepublishOnly": "yarn clean && yarn lint && yarn test && yarn build",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "engines": {
     "node": ">= 8.x"

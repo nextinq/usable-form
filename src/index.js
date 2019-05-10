@@ -1,4 +1,5 @@
 // @flow
+// eslint-disable-next-line import/no-unresolved
 import { useReducer } from 'react';
 
 import { isInputTouched, mapInputError } from './form-validation';
