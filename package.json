@@ -1,12 +1,12 @@
 {
-  "name": "use-form",
+  "name": "usable-form",
   "version": "0.1.0",
   "description": "React form library built on react-hooks",
   "main": "lib/index.js",
   "files": [
     "lib/**"
   ],
-  "repository": "git@github.com:jkaramon/use-form.git",
+  "repository": "git@github.com:jkaramon/usable-form.git",
   "author": "Josef Karamon <josef.karamon@gmail.com>",
   "license": "MIT",
   "devDependencies": {
