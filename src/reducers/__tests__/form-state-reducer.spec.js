@@ -43,7 +43,7 @@ describe('formStateReducer', () => {
   });
 
   it('should throw for non-existing action', () => {
-    expect(() => reducer({}, { type: 'non-existing-action' })).toThrowError(
+    expect(() => reducer({}, { type: 'non-existing-action' })).toThrow(
       'Unknown action: non-existing-action'
     );
   });
