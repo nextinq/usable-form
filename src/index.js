@@ -1,6 +1,7 @@
 // @flow
 // eslint-disable-next-line import/no-unresolved
-import { useReducer, useEffect } from 'react';
+import { useReducer, useEffect, useState } from 'react';
+import deepEqual from 'deep-equal';
 
 import { getInputError, isInputTouched } from './utils/form-validation';
 import { formValuesReducer } from './reducers/form-values-reducer';
@@ -49,18 +50,22 @@ export function useForm(options: UseFormOptions) {
     formValuesReducer,
     initialValues
   );
+  const [prevInitialValues, setPrevinitialValues] = useState(initialValues);
   const [formState, dispatchFormState]: [
     FormStateReducer,
     DispatchFn
   ] = useReducer(formStateReducer, initialFormState);
 
   useEffect(() => {
-    dispatch({
-      type: 'set-values',
-      payload: {
-        values: { ...formValues, ...initialValues }
-      }
-    });
+    if (!deepEqual(initialValues, prevInitialValues)) {
+      dispatch({
+        type: 'set-values',
+        payload: {
+          values: { ...formValues, ...initialValues }
+        }
+      });
+      setPrevinitialValues(initialValues);
+    }
   }, [initialValues]);
 
   const runValidation = (fieldName, values: FormValues) => {
