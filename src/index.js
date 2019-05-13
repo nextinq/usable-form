@@ -1,6 +1,6 @@
 // @flow
 // eslint-disable-next-line import/no-unresolved
-import { useReducer } from 'react';
+import { useReducer, useEffect } from 'react';
 
 import { getInputError, isInputTouched } from './utils/form-validation';
 import { formValuesReducer } from './reducers/form-values-reducer';
@@ -53,6 +53,15 @@ export function useForm(options: UseFormOptions) {
     FormStateReducer,
     DispatchFn
   ] = useReducer(formStateReducer, initialFormState);
+
+  useEffect(() => {
+    dispatch({
+      type: 'set-values',
+      payload: {
+        values: { ...formValues, ...initialValues }
+      }
+    });
+  }, [initialValues]);
 
   const runValidation = (fieldName, values: FormValues) => {
     dispatchFormState({ type: 'field-touched', payload: { fieldName } });
