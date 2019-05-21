@@ -2,6 +2,7 @@
 
 import type { FormValues } from '../types';
 import type { FormValuesReducerActions } from './form-values-reducer-types.flow';
+import { setFieldInputValue } from '../utils/field-utils';
 
 export function formValuesReducer(
   state: FormValues,
@@ -10,7 +11,7 @@ export function formValuesReducer(
   switch (action.type) {
     case 'set-field-value': {
       const { fieldName, value } = action.payload;
-      return { ...state, [fieldName]: value };
+      return { ...setFieldInputValue(fieldName, value, state) };
     }
     case 'set-values': {
       const { values } = action.payload;

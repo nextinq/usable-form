@@ -1,5 +1,5 @@
 // @flow
-export type ErrorSeverity = 'Error' | 'Warning';
+export type ErrorSeverity = 'error' | 'warning' | string;
 
 export type DispatchFn = Object => void;
 
@@ -42,7 +42,7 @@ export type InitUseFormOptions = {
   schemaValidator: ?(
     validationSchema: Object,
     formValues: FormValues,
-    fieldName: string
+    fieldName: ?string
   ) => Array<ValidationError>
 };
 
@@ -51,7 +51,7 @@ export type UseFormOptions = {
   validationSchema?: Object,
   validateForm?: (
     formValues: FormValues,
-    fieldName: string
+    fieldName: ?string
   ) => Array<ValidationError>
 };
 

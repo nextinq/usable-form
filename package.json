@@ -20,7 +20,7 @@
     "babel-plugin-external-helpers": "^6.22.0",
     "coveralls": "^3.0.3",
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.13.0",
+    "enzyme-adapter-react-16": "^1.13.1",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.2.0",
@@ -44,7 +44,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "test": "yarn jest src",
-    "test:watch": "yarn jest src --watch --notify",
+    "test:watch": "yarn jest src --watch",
     "lint": "eslint src",
     "build:copy-flow": "yarn run flow-copy-source --ignore '**/__tests__/**' ./src ./lib",
     "build": "yarn clean && yarn rollup -c && yarn build:copy-flow",
@@ -70,6 +70,8 @@
     "react": "^16.8.6"
   },
   "dependencies": {
-    "deep-equal": "^1.0.1"
+    "deep-equal": "^1.0.1",
+    "lodash.get": "^4.4.2",
+    "lodash.set": "^4.3.2"
   }
 }
