@@ -42,6 +42,8 @@
     "rollup-plugin-flow": "^1.1.1"
   },
   "scripts": {
+    "bump": "npm version patch && git push",
+    "publish": "npm publish",
     "clean": "rimraf lib",
     "test": "yarn jest src",
     "test:watch": "yarn jest src --watch",
