@@ -154,7 +154,8 @@ export function useForm(options: UseFormOptions) {
   }, []);
 
   const setValues = useCallback((values: Object) => {
-    dispatch({ type: 'set-values', payload: { values } });
+    const finalValues = { ...(formValues || {}), ...(values || {}) };
+    dispatch({ type: 'set-values', payload: { values: finalValues } });
   }, []);
 
   return {
