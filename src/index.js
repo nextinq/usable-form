@@ -44,7 +44,9 @@ export function useForm(options: UseFormOptions) {
     formValuesReducer,
     initialValues
   );
-  const [prevInitialValues, setPrevInitialValues] = useState(initialValues);
+  const [prevInitialValues, setPrevInitialValues] = useState({
+    ...initialValues
+  });
   const [formState, dispatchFormState]: [
     FormStateReducer,
     DispatchFn
