@@ -39,7 +39,8 @@ export function initUseForm(options: InitUseFormOptions) {
 
 export function useForm(options: UseFormOptions) {
   const opts = options || {};
-  const initialValues = opts.initialValues || {};
+  const originalInitialValues = opts.initialValues || {};
+  const initialValues = { ...originalInitialValues };
   const [formValues, dispatch]: [FormValues, DispatchFn] = useReducer(
     formValuesReducer,
     initialValues
