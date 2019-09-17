@@ -9,7 +9,17 @@ const plugins = targets => [
   flow(),
   // use Babel to transpile to ES5
   babel({
-    exclude: 'node_modules/**'
+    // ignore node_modules/ in transpilation process
+    exclude: 'node_modules/**',
+    // ignore .babelrc (if defined) and use options defined here
+    babelrc: false,
+    // use recommended babel-preset-env without es modules enabled
+    // and with possibility to set custom targets e.g. { node: '8' }
+    presets: [['@babel/preset-env', { modules: false, targets }]],
+    // solve a problem with spread operator transpilation https://github.com/rollup/rollup/issues/281
+    plugins: ['@babel/plugin-proposal-object-rest-spread'],
+    // removes comments from output
+    comments: false
   })
 ];
 
