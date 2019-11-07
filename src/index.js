@@ -40,7 +40,10 @@ export function initUseForm(options: InitUseFormOptions) {
 export function useForm(options: UseFormOptions) {
   const opts = options || {};
   const originalInitialValues = opts.initialValues || {};
-  const initialValues = { ...originalInitialValues };
+  const initialValues =
+    originalInitialValues instanceof Object
+      ? JSON.parse(JSON.stringify(originalInitialValues))
+      : originalInitialValues;
   const [formValues, dispatch]: [FormValues, DispatchFn] = useReducer(
     formValuesReducer,
     initialValues
@@ -100,7 +103,7 @@ export function useForm(options: UseFormOptions) {
       validateForm();
       setPrevInitialValues(initialValues);
     }
-  }, [initialValues]);
+  }, [originalInitialValues]);
 
   const setFieldValue = useCallback(
     (fieldName: string, value: string) => {
