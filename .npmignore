@@ -5,9 +5,10 @@ npm-debug.log*
 coverage
 .nyc_output
 
+__tests__
+
 # Dependency directories
 node_modules
-flow-typed
 
 # npm package lock
 package-lock.json
