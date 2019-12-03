@@ -1,63 +1,50 @@
-// @flow
-// eslint-disable-next-line import/no-unresolved
 import { useReducer, useEffect, useState, useCallback } from 'react';
 import deepEqual from 'deep-equal';
 
 import { getInputError, isInputTouched } from './utils/form-validation';
 import { formValuesReducer } from './reducers/form-values-reducer';
 
-import {
-  formStateReducer,
-  initialFormState
-} from './reducers/form-state-reducer';
+import { formStateReducer, initialFormState } from './reducers/form-state-reducer';
 
-import type {
-  DispatchFn,
-  FormStateReducer,
-  FormValues,
+import {
   InitUseFormOptions,
   UseFormOptions,
-  ValidationError
+  ValidationError,
+  UseFormResult,
+  DispatchFn
 } from './types';
 import { getFieldInputValue, setupInput } from './utils/field-utils';
 
-export type {
-  UseFormResult,
-  UseFormOptions,
-  InitUseFormOptions,
-  FormValues,
-  FormState
-} from './types';
+export { UseFormResult, UseFormOptions, InitUseFormOptions, FormState } from './types';
 
 const initOpts: InitUseFormOptions = {
   schemaValidator: null
 };
 
-export function initUseForm(options: InitUseFormOptions) {
+export function initUseForm(options: InitUseFormOptions): void {
   initOpts.schemaValidator = options && options.schemaValidator;
 }
 
-export function useForm(options: UseFormOptions) {
+export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResult<TValues> {
   const opts = options || {};
   const originalInitialValues = opts.initialValues || {};
   const initialValues =
     originalInitialValues instanceof Object
       ? JSON.parse(JSON.stringify(originalInitialValues))
       : originalInitialValues;
-  const [formValues, dispatch]: [FormValues, DispatchFn] = useReducer(
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
+  const [formValues, dispatch]: [TValues, DispatchFn<TValues>] = useReducer(
     formValuesReducer,
     initialValues
   );
   const [prevInitialValues, setPrevInitialValues] = useState({
     ...initialValues
   });
-  const [formState, dispatchFormState]: [
-    FormStateReducer,
-    DispatchFn
-  ] = useReducer(formStateReducer, initialFormState);
+  const [formState, dispatchFormState] = useReducer(formStateReducer, initialFormState);
 
   const runValidation = useCallback(
-    (fieldName: ?string, values: FormValues) => {
+    (fieldName: string | null | undefined, values: TValues) => {
       if (fieldName) {
         dispatchFormState({ type: 'field-touched', payload: { fieldName } });
       }
@@ -70,11 +57,7 @@ export function useForm(options: UseFormOptions) {
         });
       }
       if (!validateForm && validationSchema && initOpts.schemaValidator) {
-        const errors = initOpts.schemaValidator(
-          validationSchema,
-          values,
-          fieldName
-        );
+        const errors = initOpts.schemaValidator(validationSchema, values, fieldName);
         dispatchFormState({
           type: 'set-form-errors',
           payload: { errors: errors || [], touchFields: false }
@@ -114,8 +97,9 @@ export function useForm(options: UseFormOptions) {
     [formValues]
   );
 
-  const handleInputChange: any = useCallback(
-    (fieldName: string) => (e: any, data: ?{ value: string }) => {
+  const handleInputChange = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (fieldName: string) => (e: any, data: any): void => {
       const value = data ? data.value : e.currentTarget.value;
       setFieldValue(fieldName, value);
     },
@@ -135,7 +119,7 @@ export function useForm(options: UseFormOptions) {
         value: getFieldInputValue(fieldName, formValues),
         ...setupInput(fieldName),
         onChange: handleInputChange(fieldName),
-        onBlur: () => handleInputBlur(fieldName)
+        onBlur: (): void => handleInputBlur(fieldName)
       };
     },
     [formValues]
@@ -159,9 +143,12 @@ export function useForm(options: UseFormOptions) {
     });
   }, []);
 
-  const setValues = useCallback((values: Object) => {
+  const setValues = useCallback((values: TValues) => {
     const finalValues = { ...(formValues || {}), ...(values || {}) };
-    dispatch({ type: 'set-values', payload: { values: finalValues } });
+    dispatch({
+      type: 'set-values',
+      payload: { values: finalValues as TValues }
+    });
   }, []);
 
   return {

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import {
   initialFormState as initialState,
   formStateReducer as reducer
@@ -13,9 +15,7 @@ describe('formStateReducer', () => {
   });
 
   it('should set form errors and touch erroneous fields', () => {
-    const errors = [
-      { code: 'required', source: 'firstName', severity: 'Error' }
-    ];
+    const errors = [{ code: 'required', source: 'firstName', severity: 'Error' }];
     const nextState = reducer(initialState, {
       type: 'set-form-errors',
       payload: { errors, touchFields: true }
@@ -28,9 +28,7 @@ describe('formStateReducer', () => {
   });
 
   it('should set form-errors without touching erroneous fields', () => {
-    const errors = [
-      { code: 'required', source: 'firstName', severity: 'Error' }
-    ];
+    const errors = [{ code: 'required', source: 'firstName', severity: 'Error' }];
     const nextState = reducer(initialState, {
       type: 'set-form-errors',
       payload: { errors, touchFields: false }
@@ -40,11 +38,5 @@ describe('formStateReducer', () => {
       errors,
       touched: []
     });
-  });
-
-  it('should throw for non-existing action', () => {
-    expect(() => reducer({}, { type: 'non-existing-action' })).toThrow(
-      'Unknown action: non-existing-action'
-    );
   });
 });

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   getFieldInputName,
   getFieldParts,
@@ -12,10 +13,7 @@ describe('field-utils', () => {
       expect(getFieldParts('firstName')).toEqual(['firstName']);
     });
     it('should return parts for nested field', () => {
-      expect(getFieldParts('person.firstName')).toEqual([
-        'person',
-        'firstName'
-      ]);
+      expect(getFieldParts('person.firstName')).toEqual(['person', 'firstName']);
     });
   });
 
@@ -24,9 +22,7 @@ describe('field-utils', () => {
       expect(getFieldInputName('firstName')).toEqual('firstName');
     });
     it('should return parts for nested field', () => {
-      expect(getFieldInputName('person.firstName')).toEqual(
-        'person__firstName'
-      );
+      expect(getFieldInputName('person.firstName')).toEqual('person__firstName');
     });
   });
 
@@ -47,9 +43,7 @@ describe('field-utils', () => {
 
   describe('getFieldInputValue', () => {
     it('simpleField', () => {
-      expect(getFieldInputValue('firstName', { firstName: 'Joe' })).toEqual(
-        'Joe'
-      );
+      expect(getFieldInputValue('firstName', { firstName: 'Joe' })).toEqual('Joe');
     });
 
     it('existing nested field', () => {

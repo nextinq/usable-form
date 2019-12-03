@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// @ts-nocheck
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { useForm } from '../index';
@@ -16,9 +16,7 @@ function TestInitialValuesForm(props = { initialValues: {} }) {
 
 describe('initialValues', () => {
   it('initialValues', () => {
-    const wrapper = mount(
-      <TestInitialValuesForm initialValues={{ firstName: 'Ken' }} />
-    );
+    const wrapper = mount(<TestInitialValuesForm initialValues={{ firstName: 'Ken' }} />);
     expect(wrapper.find('#firstName').html()).toContain(`value="Ken"`);
     expect(wrapper.prop('initialValues')).toEqual({
       firstName: 'Ken'
@@ -26,9 +24,7 @@ describe('initialValues', () => {
   });
 
   it('Re-initialize initialValues', () => {
-    const wrapper = mount(
-      <TestInitialValuesForm initialValues={{ firstName: 'Ken' }} />
-    );
+    const wrapper = mount(<TestInitialValuesForm initialValues={{ firstName: 'Ken' }} />);
     wrapper.setProps({ initialValues: { firstName: 'Barbie' } });
     expect(wrapper.find('#firstName').html()).toContain(`value="Barbie"`);
     expect(wrapper.prop('initialValues')).toEqual({

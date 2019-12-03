@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { formValuesReducer as reducer } from '../form-values-reducer';
 
 describe('formValuesReducer', () => {
@@ -27,11 +29,5 @@ describe('formValuesReducer', () => {
       }
     );
     expect(nextState).toMatchObject(values);
-  });
-
-  it('should throw for non-existing action', () => {
-    expect(() => reducer({}, { type: 'non-existing-action' })).toThrow(
-      'Unknown action: non-existing-action'
-    );
   });
 });

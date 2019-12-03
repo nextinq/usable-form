@@ -4,6 +4,8 @@ logs
 npm-debug.log*
 yarn-error.log
 
+.parcel-cache
+
 # Runtime data
 pids
 *.pid

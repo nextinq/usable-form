@@ -1,6 +1,6 @@
 {
   "name": "usable-form",
-  "version": "0.1.10",
+  "version": "0.2.0",
   "description": "React form library built on react-hooks",
   "main": "lib/index.js",
   "files": [
@@ -9,71 +9,54 @@
   "repository": "git@github.com:jkaramon/usable-form.git",
   "author": "Josef Karamon <josef.karamon@gmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.4",
-    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
-    "@babel/plugin-transform-flow-strip-types": "^7.4.4",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.8.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "coveralls": "^3.0.3",
-    "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.13.1",
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.2.0",
-    "eslint-plugin-flowtype": "^3.8.1",
-    "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-jest": "^22.5.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "flow-bin": "^0.98.1",
-    "flow-copy-source": "^2.0.4",
-    "flow-typed": "^2.5.1",
-    "husky": ">=1",
-    "jest": "^24.8.0",
-    "lint-staged": ">=8",
-    "prettier": "1.17.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "rollup": "^1.11.3",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-flow": "^1.1.1"
-  },
   "scripts": {
     "bump": "npm version patch && git push",
     "publish": "npm publish",
     "clean": "rimraf lib",
     "test": "yarn jest src",
     "test:watch": "yarn jest src --watch",
-    "lint": "eslint src",
-    "build:copy-flow": "yarn run flow-copy-source --ignore '**/__tests__/**' ./src ./lib",
-    "build": "yarn clean && yarn rollup -c && yarn build:copy-flow",
-    "precommit": "lint-staged && yarn flow && yarn lint && yarn test",
+    "lint": "yarn eslint 'src/{**/*,*}.ts*'",
+    "build": "yarn clean && yarn tsc",
+    "format": "prettier --single-quote --arrow-parens always --write 'src/{**/*,*}.ts*'",
     "prepublishOnly": "yarn clean && yarn lint && yarn test && yarn build",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "engines": {
     "node": ">= 8.x"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn precommit"
-    }
-  },
-  "lint-staged": {
-    "*.{js,css,json,md}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
   "peerDependencies": {
-    "react": "^16.8.6"
+    "react": ">=16.8"
+  },
+  "devDependencies": {
+    "@types/deep-equal": "^1.0.1",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.23",
+    "@types/lodash.get": "^4.4.6",
+    "@types/lodash.set": "^4.3.6",
+    "@types/react": "^16.9.14",
+    "@typescript-eslint/eslint-plugin": "^2.10.0",
+    "@typescript-eslint/parser": "^2.10.0",
+    "coveralls": "^3.0.9",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "husky": ">=3.1.0",
+    "jest": "^24.9.0",
+    "lint-staged": ">=9.5.0",
+    "prettier": "1.19.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.2"
   },
   "dependencies": {
-    "deep-equal": "^1.0.1",
+    "deep-equal": "^1.1.1",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2"
   }

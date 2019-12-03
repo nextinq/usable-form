@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// @ts-nocheck
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { useForm } from '../index';
@@ -24,10 +24,7 @@ function TestForm() {
   return (
     <form>
       {JSON.stringify(formValues)}
-      <button
-        id="set-country"
-        onClick={() => setFieldValue('country.code', 'cz')}
-      />
+      <button id="set-country" onClick={() => setFieldValue('country.code', 'cz')} />
       <button id="set-values" onClick={() => setValues(otherCompany)} />
       <input {...setupField('name')} />
       <input {...setupField('country.code')} />

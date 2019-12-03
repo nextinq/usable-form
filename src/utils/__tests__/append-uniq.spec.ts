@@ -1,5 +1,4 @@
-// @flow
-
+// @ts-nocheck
 import { appendUniq } from '../append-uniq';
 
 describe('appendUniq', () => {

@@ -1,7 +1,6 @@
-// @flow
-
+// @ts-nocheck
 import { isInputTouched, getInputError } from '../form-validation';
-import type { ValidationError } from '../../types';
+import { ValidationError } from '../../types';
 
 describe('form-validation', () => {
   describe('isInputTouched', () => {

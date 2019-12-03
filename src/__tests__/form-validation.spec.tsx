@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// @ts-nocheck
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { useForm, initUseForm } from '../index';
@@ -22,11 +22,7 @@ function Form(props) {
   return (
     <form>
       <input {...setupField('firstName')} />
-      <button
-        id="submit"
-        type="submit"
-        onSubmit={() => onSubmit(formValues, formState)}
-      />
+      <button id="submit" type="submit" onSubmit={() => onSubmit(formValues, formState)} />
     </form>
   );
 }

@@ -1,13 +1,10 @@
-// @flow
-
-import type { FormValues } from '../types';
-import type { FormValuesReducerActions } from './form-values-reducer-types.flow';
+import { FormValuesReducerActions } from '../types';
 import { setFieldInputValue } from '../utils/field-utils';
 
-export function formValuesReducer(
-  state: FormValues,
-  action: FormValuesReducerActions
-): FormValues {
+export function formValuesReducer<TValues>(
+  state: TValues,
+  action: FormValuesReducerActions<TValues>
+): TValues {
   switch (action.type) {
     case 'set-field-value': {
       const { fieldName, value } = action.payload;
@@ -16,9 +13,6 @@ export function formValuesReducer(
     case 'set-values': {
       const { values } = action.payload;
       return { ...state, ...values };
-    }
-    default: {
-      throw new Error(`Unknown action: ${action.type}`);
     }
   }
 }

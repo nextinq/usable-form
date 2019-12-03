@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+// @ts-nocheck
 import * as React from 'react';
 import { mount } from 'enzyme';
 import { useForm } from '../index';
@@ -19,10 +19,7 @@ function TestForm(props = { initialValues: {}, values: {} }) {
 describe('setValues', () => {
   it('setValues should merge values', () => {
     const wrapper = mount(
-      <TestForm
-        initialValues={{ firstName: 'Ken' }}
-        values={{ firstName: 'Joe' }}
-      />
+      <TestForm initialValues={{ firstName: 'Ken' }} values={{ firstName: 'Joe' }} />
     );
     expect(wrapper.find('#firstName').prop('value')).toEqual('Ken');
     expect(wrapper.prop('initialValues')).toEqual({
