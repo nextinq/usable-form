@@ -1,0 +1,19 @@
+name: Build on push to feature branch
+on: 
+  push:
+    branches-ignore:
+      - master
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - run: yarn
+      - run: yarn build
+      - run: yarn lint
+      - run: yarn test
+        

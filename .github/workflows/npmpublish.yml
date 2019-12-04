@@ -1,0 +1,38 @@
+name: Publish npm package on master branch push
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org
+
+      - run: yarn
+      - run: yarn build
+      - run: yarn lint
+      - run: yarn test
+
+      - name: Publish to npmjs.org
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+# PUBLISH Private package to Github registry
+# - uses: actions/checkout@v1
+# - name: Publish to Github registry
+#   uses: actions/setup-node@v1
+#   with:
+#     node-version: 12
+#     registry-url: https://npm.pkg.github.com/
+#     scope: '@your-github-username'
+# - run: npm publish
+#   env:
+#     NODE_AUTH_TOKEN: ${{secrets.github_token}}

@@ -1,12 +1,12 @@
 {
-  "name": "usable-form",
-  "version": "0.2.2",
+  "name": "@nextinq/usable-form",
+  "version": "0.9.0",
   "description": "React form library built on react-hooks",
   "main": "lib/index.js",
   "files": [
     "lib/**"
   ],
-  "repository": "git@github.com:jkaramon/usable-form.git",
+  "repository": "git@github.com:nextinq/usable-form.git",
   "author": "Josef Karamon <josef.karamon@gmail.com>",
   "license": "MIT",
   "scripts": {
@@ -18,7 +18,6 @@
     "lint": "yarn eslint 'src/{**/*,*}.ts*'",
     "build": "yarn clean && yarn tsc",
     "format": "prettier --single-quote --arrow-parens always --write 'src/{**/*,*}.ts*'",
-    "prepublishOnly": "yarn clean && yarn lint && yarn test && yarn build",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
   "engines": {
