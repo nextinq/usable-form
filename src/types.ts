@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, KeyboardEvent } from 'react';
+import { ChangeEvent, FocusEvent, KeyboardEvent, SyntheticEvent } from 'react';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type ErrorSeverity = 'error' | 'warning' | string;
 
@@ -25,9 +25,9 @@ export type FormState = FormStateReducer & {
 
 export type SetupFieldResult = {
   value: any;
-  onBlur: (e: FocusEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement>) => void;
+  onBlur: (e: FocusEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement> | FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void;
   onChange: (
-    e: ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement> | SyntheticEvent<HTMLElement>,
     data: Partial<{
       value: FormValue | Array<FormValue> | null | undefined | any | string[];
     }>
