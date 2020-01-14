@@ -25,7 +25,13 @@ export type FormState = FormStateReducer & {
 
 export type SetupFieldResult = {
   value: any;
-  onBlur: (e: FocusEvent<HTMLInputElement> | KeyboardEvent<HTMLInputElement> | FocusEvent<HTMLElement> | KeyboardEvent<HTMLElement>) => void;
+  onBlur: (
+    e:
+      | FocusEvent<HTMLInputElement>
+      | KeyboardEvent<HTMLInputElement>
+      | FocusEvent<HTMLElement>
+      | KeyboardEvent<HTMLElement>
+  ) => void;
   onChange: (
     e: ChangeEvent<HTMLInputElement> | SyntheticEvent<HTMLElement>,
     data: Partial<{
