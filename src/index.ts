@@ -1,5 +1,6 @@
 import { useReducer, useEffect, useState, useCallback } from 'react';
 import deepEqual from 'deep-equal';
+import cloneDeep from 'lodash.clonedeep';
 
 import { getInputError, isInputTouched } from './utils/form-validation';
 import { formValuesReducer } from './reducers/form-values-reducer';
@@ -30,7 +31,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   const originalInitialValues = opts.initialValues || {};
   const initialValues =
     originalInitialValues instanceof Object
-      ? JSON.parse(JSON.stringify(originalInitialValues))
+      ? cloneDeep(originalInitialValues)
       : originalInitialValues;
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore

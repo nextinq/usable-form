@@ -1,6 +1,6 @@
 {
   "name": "@nextinq.public/usable-form",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "React form library built on react-hooks",
   "main": "lib/index.js",
   "files": [
@@ -31,6 +31,7 @@
     "@types/deep-equal": "^1.0.1",
     "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.23",
+    "@types/lodash.clonedeep": "^4.5.6",
     "@types/lodash.get": "^4.4.6",
     "@types/lodash.set": "^4.3.6",
     "@types/react": "^16.9.14",
@@ -57,6 +58,7 @@
   },
   "dependencies": {
     "deep-equal": "^1.1.1",
+    "lodash.clonedeep": "^4.5.0",
     "lodash.get": "^4.4.2",
     "lodash.set": "^4.3.2"
   }
