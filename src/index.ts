@@ -75,13 +75,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
         payload: { errors: errors || [], touchFields: false }
       });
     }
-  }, [
-    opts.validateForm,
-    opts.validationSchema,
-    initOpts.schemaValidator,
-    formValues,
-    formState.touched
-  ]);
+  }, [opts.validateForm, opts.validationSchema, initOpts.schemaValidator, formValues]);
 
   const validateForm = useCallback(() => {
     setTouched(null);
