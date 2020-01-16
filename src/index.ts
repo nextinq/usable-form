@@ -44,37 +44,48 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   });
   const [formState, dispatchFormState] = useReducer(formStateReducer, initialFormState);
 
-  const runValidation = useCallback(
-    (fieldName: string | null | undefined, values: TValues) => {
+  const setTouched = useCallback(
+    (fieldName: string | null | undefined) => {
       if (fieldName) {
         dispatchFormState({ type: 'field-touched', payload: { fieldName } });
       }
-      const { validateForm, validationSchema } = opts;
-      if (validateForm) {
-        const errors = validateForm(values, fieldName);
-        dispatchFormState({
-          type: 'set-form-errors',
-          payload: { errors: errors || [], touchFields: false }
-        });
-      }
-      if (!validateForm && validationSchema && initOpts.schemaValidator) {
-        const errors = initOpts.schemaValidator(validationSchema, values, fieldName);
-        dispatchFormState({
-          type: 'set-form-errors',
-          payload: { errors: errors || [], touchFields: false }
-        });
-      }
     },
-    [opts.validateForm, opts.validationSchema, initOpts.schemaValidator]
+    [
+      opts.validateForm,
+      opts.validationSchema,
+      initOpts.schemaValidator,
+      formValues,
+      formState.touched
+    ]
   );
 
-  const validateForm = useCallback(() => {
-    runValidation(null, formValues);
-  }, [formValues]);
-
   useEffect(() => {
-    validateForm();
-  }, []);
+    const { validateForm, validationSchema } = opts;
+    if (validateForm) {
+      const errors = validateForm(formValues, null);
+      dispatchFormState({
+        type: 'set-form-errors',
+        payload: { errors: errors || [], touchFields: false }
+      });
+    }
+    if (!validateForm && validationSchema && initOpts.schemaValidator) {
+      const errors = initOpts.schemaValidator(validationSchema, formValues, null);
+      dispatchFormState({
+        type: 'set-form-errors',
+        payload: { errors: errors || [], touchFields: false }
+      });
+    }
+  }, [
+    opts.validateForm,
+    opts.validationSchema,
+    initOpts.schemaValidator,
+    formValues,
+    formState.touched
+  ]);
+
+  const validateForm = useCallback(() => {
+    setTouched(null);
+  }, [formValues]);
 
   useEffect(() => {
     if (!deepEqual(initialValues, prevInitialValues)) {
@@ -92,8 +103,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   const setFieldValue = useCallback(
     (fieldName: string, value: string) => {
       dispatch({ type: 'set-field-value', payload: { fieldName, value } });
-      const values = { ...formValues, [fieldName]: value };
-      runValidation(fieldName, values);
+      setTouched(fieldName);
     },
     [formValues]
   );
@@ -109,7 +119,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
 
   const handleInputBlur = useCallback(
     (fieldName: string) => {
-      runValidation(fieldName, formValues);
+      setTouched(fieldName);
     },
     [formValues]
   );
