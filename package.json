@@ -1,6 +1,6 @@
 {
   "name": "@nextinq.public/usable-form",
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "React form library built on react-hooks",
   "main": "lib/index.js",
   "files": [
@@ -12,7 +12,6 @@
   "license": "MIT",
   "scripts": {
     "bump": "npm version patch && git push",
-    "publish": "npm publish",
     "clean": "rimraf lib",
     "test": "yarn jest src",
     "test:watch": "yarn jest src --watch",
