@@ -18,6 +18,8 @@ import { getFieldInputValue, setupInput } from './utils/field-utils';
 
 export { UseFormResult, UseFormOptions, InitUseFormOptions, FormState } from './types';
 
+export { saveRestApiForm } from './save-rest-api-form';
+
 const initOpts: InitUseFormOptions = {
   schemaValidator: null
 };

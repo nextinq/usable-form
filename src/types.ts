@@ -112,3 +112,25 @@ export type UseFormResult<TValues> = {
   formState: FormState;
   setValues: (values: TValues) => void;
 };
+
+export type ErrorMapperOptions = {
+  /**
+   * Source prefixes to be stripped from API error source
+   */
+  ignoredPrefixes?: Array<string>;
+  /**
+   * Error source map: (apiError -> formError)
+   *
+   * @example
+   * {
+   *   'client.name': 'firstName'
+   * }
+   * API error with source 'client.name' will be mapped to form error source 'firstName'
+   *
+   */
+  errorSourceMap?: any;
+  /**
+   * Fields, which will be treated as base errors and will be displayed with error summary component only.
+   **/
+  nonFieldErrors?: Array<string>;
+};
