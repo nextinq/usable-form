@@ -137,6 +137,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
         error: getInputError(fieldName, formState.errors),
         touched: isInputTouched(fieldName, formState.touched),
         locPrefix,
+        labelKey: fieldName,
         label: fieldName
       };
     },

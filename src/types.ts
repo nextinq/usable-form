@@ -82,7 +82,8 @@ export type SetupWrapperResult = {
   error?: ValidationError | null | undefined;
   touched?: boolean;
   locPrefix?: string;
-  label: string;
+  label?: string;
+  labelKey?: string;
 };
 
 export type InitUseFormOptions = {
