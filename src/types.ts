@@ -83,7 +83,7 @@ export type SetupWrapperResult = {
   touched?: boolean;
   locPrefix?: string;
   label?: string;
-  labelKey?: string;
+  locKey?: string;
 };
 
 export type InitUseFormOptions = {
