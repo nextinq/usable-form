@@ -16,7 +16,7 @@ import {
 } from './types';
 import { getFieldInputValue, setupInput } from './utils/field-utils';
 
-export { UseFormResult, UseFormOptions, InitUseFormOptions, FormState } from './types';
+export * from './types';
 
 export { saveRestApiForm } from './save-rest-api-form';
 
