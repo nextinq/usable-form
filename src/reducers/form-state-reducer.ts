@@ -34,7 +34,6 @@ export function formStateReducer(
         [...state.errors]
       );
 
-      console.log(newErrors, 'old', state.errors);
       const newTouched = new Set([...state.touched, ...touched]);
       return {
         ...state,

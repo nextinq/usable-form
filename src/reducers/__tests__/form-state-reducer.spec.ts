@@ -42,7 +42,6 @@ describe('formStateReducer', () => {
         touchFields: true
       }
     });
-    console.log(nextState, [...initErrors, ...newErrors]);
     expect(nextState).toMatchObject({
       isValid: false,
       errors: [...initErrors, ...newErrors],
