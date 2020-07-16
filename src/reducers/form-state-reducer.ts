@@ -46,7 +46,8 @@ export function formStateReducer(
       return { ...state, errors: [], isValid: true };
     }
     case 'clear-field-error': {
-      return { ...state, errors: [], isValid: true };
+      const newErrors = state.errors.filter((err) => err.source !== action.payload.fieldName);
+      return { ...state, errors: newErrors, isValid: true };
     }
   }
 }

@@ -104,6 +104,16 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
     [formValues]
   );
 
+  const clearFieldError = useCallback((fieldName: string, touched = false) => {
+    dispatchFormState({
+      type: 'clear-field-error',
+      payload: {
+        fieldName,
+        touched
+      }
+    });
+  }, []);
+
   const handleInputChange = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (fieldName: string) => (e: any, data: any): void => {
@@ -115,6 +125,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
 
   const handleInputBlur = useCallback(
     (fieldName: string) => {
+      clearFieldError(fieldName);
       setTouched(fieldName);
     },
     [formValues]
@@ -154,16 +165,6 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   const clearFormErrors = useCallback(() => {
     dispatchFormState({
       type: 'clear-form-errors'
-    });
-  }, []);
-
-  const clearFieldError = useCallback((fieldName: string, touched = false) => {
-    dispatchFormState({
-      type: 'clear-field-error',
-      payload: {
-        fieldName,
-        touched
-      }
     });
   }, []);
 
