@@ -133,11 +133,14 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
 
   const setupField = useCallback(
     (fieldName: string) => {
+      const error = getInputError(fieldName, formState.errors);
+      const touched = isInputTouched(fieldName, formState.touched);
       return {
         value: getFieldInputValue(fieldName, formValues),
         ...setupInput(fieldName),
         onChange: handleInputChange(fieldName),
-        onBlur: (): void => handleInputBlur(fieldName)
+        onBlur: (): void => handleInputBlur(fieldName),
+        severity: error && touched ? error.severity : null
       };
     },
     [formValues]
