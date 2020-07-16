@@ -62,7 +62,7 @@ describe('field-utils', () => {
             firstName: 'Joe'
           }
         })
-      ).toEqual(null);
+      ).toEqual(undefined);
     });
     it('non existing values', () => {
       expect(
@@ -71,7 +71,7 @@ describe('field-utils', () => {
             firstName: 'Joe'
           }
         })
-      ).toEqual(null);
+      ).toEqual(undefined);
     });
   });
 

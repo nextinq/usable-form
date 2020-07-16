@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import {
   initialFormState as initialState,
   formStateReducer as reducer
@@ -12,6 +10,44 @@ describe('formStateReducer', () => {
       payload: { fieldName: 'field1' }
     });
     expect(nextState.touched).toContain('field1');
+  });
+
+  it('should update existing error', () => {
+    const errors = [{ code: 'required', source: 'firstName', severity: 'Error' }];
+    const oldState = { ...initialState, errors };
+
+    const nextState = reducer(oldState, {
+      type: 'set-form-errors',
+      payload: {
+        errors: [{ code: 'invalid', source: 'firstName', severity: 'Error' }],
+        touchFields: true
+      }
+    });
+    expect(nextState).toMatchObject({
+      isValid: false,
+      errors: [{ code: 'invalid', source: 'firstName', severity: 'Error' }],
+      touched: [errors[0].source]
+    });
+  });
+
+  it('should append to existing errors', () => {
+    const initErrors = [{ code: 'required', source: 'firstName', severity: 'Error' }];
+    const newErrors = [{ code: 'invalid', source: 'lastName', severity: 'Error' }];
+    const oldState = { ...initialState, errors: initErrors, touched: ['firstName'] };
+
+    const nextState = reducer(oldState, {
+      type: 'set-form-errors',
+      payload: {
+        errors: newErrors,
+        touchFields: true
+      }
+    });
+    console.log(nextState, [...initErrors, ...newErrors]);
+    expect(nextState).toMatchObject({
+      isValid: false,
+      errors: [...initErrors, ...newErrors],
+      touched: ['firstName', 'lastName']
+    });
   });
 
   it('should set form errors and touch erroneous fields', () => {

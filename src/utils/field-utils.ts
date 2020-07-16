@@ -17,7 +17,7 @@ export function getFieldInputValue<TValues>(
   formValues: TValues
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any {
-  return getFromPath(formValues, fieldName, null);
+  return getFromPath(formValues, fieldName, undefined);
 }
 
 export function setFieldInputValue<TValues>(

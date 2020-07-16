@@ -1,6 +1,6 @@
 {
   "name": "@nextinq.public/usable-form",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "React form library built on react-hooks",
   "main": "lib/index.js",
   "files": [
@@ -29,11 +29,12 @@
   "devDependencies": {
     "@types/deep-equal": "^1.0.1",
     "@types/enzyme": "^3.10.3",
-    "@types/jest": "^24.0.23",
+    "@types/jest": "^26.0.4",
     "@types/lodash.clonedeep": "^4.5.6",
     "@types/lodash.get": "^4.4.6",
     "@types/lodash.set": "^4.3.6",
     "@types/react": "^16.9.14",
+    "@types/react-dom": "^16.9.8",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "coveralls": "^3.0.9",
@@ -47,12 +48,12 @@
     "eslint-plugin-react": "^7.17.0",
     "eslint-plugin-react-hooks": "^2.3.0",
     "husky": ">=3.1.0",
-    "jest": "^24.9.0",
+    "jest": "^26.1.0",
     "lint-staged": ">=9.5.0",
     "prettier": "1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "ts-jest": "^24.2.0",
+    "ts-jest": "^26.1.2",
     "typescript": "^3.7.2"
   },
   "dependencies": {

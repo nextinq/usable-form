@@ -151,6 +151,22 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
     });
   }, []);
 
+  const clearFormErrors = useCallback(() => {
+    dispatchFormState({
+      type: 'clear-form-errors'
+    });
+  }, []);
+
+  const clearFieldError = useCallback((fieldName: string, touched = false) => {
+    dispatchFormState({
+      type: 'clear-field-error',
+      payload: {
+        fieldName,
+        touched
+      }
+    });
+  }, []);
+
   const setValues = useCallback((values: TValues) => {
     const finalValues = { ...(formValues || {}), ...(values || {}) };
     dispatch({
@@ -167,7 +183,9 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
     setFieldValue,
     formState: {
       ...formState,
-      setFormErrors
+      setFormErrors,
+      clearFormErrors,
+      clearFieldError
     }
   };
 }
