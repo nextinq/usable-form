@@ -140,7 +140,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
         ...setupInput(fieldName),
         onChange: handleInputChange(fieldName),
         onBlur: (): void => handleInputBlur(fieldName),
-        severity: error && touched ? error.severity : null
+        severity: error && touched ? error.severity || 'error' : null
       };
     },
     [formValues]

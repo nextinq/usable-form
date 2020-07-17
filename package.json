@@ -1,6 +1,6 @@
 {
   "name": "@nextinq.public/usable-form",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "description": "React form library built on react-hooks",
   "main": "lib/index.js",
   "files": [
