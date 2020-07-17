@@ -143,7 +143,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
         severity: error && touched ? error.severity || 'error' : null
       };
     },
-    [formValues]
+    [formValues, formState.errors, formState.touched]
   );
   const setupWrapper = useCallback(
     (fieldName: string, locPrefix?: string) => {
