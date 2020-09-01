@@ -1,4 +1,4 @@
-import { useReducer, useEffect, useState, useCallback } from 'react';
+import { useReducer, useEffect, useState, useCallback, useRef } from 'react';
 import deepEqual from 'deep-equal';
 import cloneDeep from 'lodash.clonedeep';
 
@@ -41,7 +41,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
     formValuesReducer,
     initialValues
   );
-  const [prevInitialValues, setPrevInitialValues] = useState({
+  const prevInitialValues = useRef({
     ...initialValues
   });
   const [formState, dispatchFormState] = useReducer(formStateReducer, initialFormState);
@@ -63,7 +63,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
 
   const clearTouched = useCallback(() => {
     dispatchFormState({ type: 'clear-touched' });
-  }, []);
+  }, [formState.touched, dispatchFormState]);
 
   useEffect(() => {
     const { validateForm, validationSchema } = opts;
@@ -83,20 +83,16 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
     }
   }, [formValues]);
 
-  const validateForm = useCallback(() => {
-    clearTouched();
-  }, [formValues]);
-
   useEffect(() => {
-    if (!deepEqual(initialValues, prevInitialValues)) {
+    if (!deepEqual(initialValues, prevInitialValues.current)) {
       dispatch({
         type: 'set-values',
         payload: {
           values: { ...formValues, ...initialValues }
         }
       });
-      clearTouched();
-      setPrevInitialValues(initialValues);
+      dispatchFormState({ type: 'clear-touched' });
+      prevInitialValues.current = initialValues;
     }
   }, [originalInitialValues]);
 
