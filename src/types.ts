@@ -23,6 +23,7 @@ export type FormState = FormStateReducer & {
   setFormErrors: (errors: Array<ValidationError>) => void;
   clearFormErrors: () => void;
   clearFieldError: (fieldName: string) => void;
+  clearTouched: () => void;
 };
 
 export type SetupFieldResult = {
@@ -90,11 +91,16 @@ export type FormStateActionClearFormErrors = {
   type: 'clear-form-errors';
 };
 
+export type FormStateActionClearTouched = {
+  type: 'clear-touched';
+};
+
 export type FormStateReducerActions =
   | FormStateActionFieldTouched
   | FormStateActionSetFormErrors
   | FormStateActionClearFormErrors
-  | FormStateActionClearFieldError;
+  | FormStateActionClearFieldError
+  | FormStateActionClearTouched;
 
 export type SetupWrapperResult = {
   error?: ValidationError | null | undefined;

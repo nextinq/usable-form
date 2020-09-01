@@ -61,6 +61,10 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
     ]
   );
 
+  const clearTouched = useCallback(() => {
+    dispatchFormState({ type: 'clear-touched' });
+  }, []);
+
   useEffect(() => {
     const { validateForm, validationSchema } = opts;
     if (validateForm) {
@@ -80,7 +84,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   }, [formValues]);
 
   const validateForm = useCallback(() => {
-    setTouched(null);
+    clearTouched();
   }, [formValues]);
 
   useEffect(() => {
@@ -91,7 +95,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
           values: { ...formValues, ...initialValues }
         }
       });
-      validateForm();
+      clearTouched();
       setPrevInitialValues(initialValues);
     }
   }, [originalInitialValues]);
@@ -189,7 +193,8 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
       ...formState,
       setFormErrors,
       clearFormErrors,
-      clearFieldError
+      clearFieldError,
+      clearTouched
     }
   };
 }

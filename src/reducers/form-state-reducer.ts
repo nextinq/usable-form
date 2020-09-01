@@ -45,6 +45,9 @@ export function formStateReducer(
     case 'clear-form-errors': {
       return { ...state, errors: [], isValid: true };
     }
+    case 'clear-touched': {
+      return { ...state, touched: [] };
+    }
     case 'clear-field-error': {
       const newErrors = state.errors.filter((err) => err.source !== action.payload.fieldName);
       return { ...state, errors: newErrors, isValid: true };
