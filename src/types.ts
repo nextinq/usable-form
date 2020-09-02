@@ -123,7 +123,7 @@ export type InitUseFormOptions = {
 
 export type UseFormOptions<TValues> = {
   initialValues?: TValues;
-  validationSchema?: Record<string, any>;
+  validationSchema?: Record<string, any> | ((data: TValues) => Record<string, any>);
   validateForm?: (
     formValues: TValues,
     fieldName: string | null | undefined

@@ -75,7 +75,9 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
       });
     }
     if (!validateForm && validationSchema && initOpts.schemaValidator) {
-      const errors = initOpts.schemaValidator(validationSchema, formValues, null);
+      const schema =
+        typeof validationSchema === 'function' ? validationSchema(formValues) : validationSchema;
+      const errors = initOpts.schemaValidator(schema, formValues, null);
       dispatchFormState({
         type: 'set-form-errors',
         payload: { errors: errors || [], touchFields: false, replace: true }
