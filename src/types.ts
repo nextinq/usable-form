@@ -76,6 +76,7 @@ export type FormStateActionSetFormErrors = {
   payload: {
     errors: Array<ValidationError>;
     touchFields: boolean;
+    replace?: boolean;
   };
 };
 

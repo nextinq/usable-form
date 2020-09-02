@@ -78,7 +78,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
       const errors = initOpts.schemaValidator(validationSchema, formValues, null);
       dispatchFormState({
         type: 'set-form-errors',
-        payload: { errors: errors || [], touchFields: false }
+        payload: { errors: errors || [], touchFields: false, replace: true }
       });
     }
   }, [formValues]);

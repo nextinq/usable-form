@@ -19,20 +19,22 @@ export function formStateReducer(
       return { ...state, touched: appendUniq(fieldName, state.touched) };
     }
     case 'set-form-errors': {
-      const { errors, touchFields } = action.payload;
+      const { errors, touchFields, replace } = action.payload;
       const touched = touchFields ? errors.map((err) => err.source) : state.touched;
-      const newErrors = errors.reduce<Array<ValidationError>>(
-        (acc, err) => {
-          const stateErrorIdx = state.errors.findIndex((e) => err.source === e.source);
-          if (stateErrorIdx !== -1) {
-            acc.splice(stateErrorIdx, 1, { ...state.errors[stateErrorIdx], ...err });
-          } else {
-            acc.push(err);
-          }
-          return acc;
-        },
-        [...state.errors]
-      );
+      const newErrors = replace
+        ? [...errors]
+        : errors.reduce<Array<ValidationError>>(
+            (acc, err) => {
+              const stateErrorIdx = state.errors.findIndex((e) => err.source === e.source);
+              if (stateErrorIdx !== -1) {
+                acc.splice(stateErrorIdx, 1, { ...state.errors[stateErrorIdx], ...err });
+              } else {
+                acc.push(err);
+              }
+              return acc;
+            },
+            [...state.errors]
+          );
 
       const newTouched = new Set([...state.touched, ...touched]);
       return {
