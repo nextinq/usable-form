@@ -127,7 +127,9 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
 
   const handleInputBlur = useCallback(
     (fieldName: string) => {
-      clearFieldError(fieldName);
+      if (opts.clearErrorOnBlur) {
+        clearFieldError(fieldName);
+      }
       setTouched(fieldName);
     },
     [formValues]
