@@ -123,7 +123,7 @@ export type InitUseFormOptions = {
 
 export type UseFormOptions<TValues> = {
   initialValues?: TValues;
-  clearErrorOnBlur: boolean;
+  clearErrorOnBlur?: boolean;
   validationSchema?: Record<string, any> | ((data: TValues) => Record<string, any>);
   validateForm?: (
     formValues: TValues,
