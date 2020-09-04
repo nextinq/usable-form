@@ -20,6 +20,8 @@ export * from './types';
 
 export { saveRestApiForm } from './save-rest-api-form';
 
+export { getInputError, isInputTouched };
+
 const initOpts: InitUseFormOptions = {
   schemaValidator: null
 };

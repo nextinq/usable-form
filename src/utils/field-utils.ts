@@ -3,7 +3,7 @@ import setFromPath from 'lodash.set';
 
 export const getFieldParts = (name: string): Array<string> => (name ? name.split('.') : [name]);
 
-export const getFieldInputName = (name: string): string => getFieldParts(name).join('__');
+export const getFieldInputName = (name: string): string => getFieldParts(name).join('.');
 
 export const setupInput = (fieldName: string): { id: string; name: string } => {
   return {

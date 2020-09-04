@@ -36,7 +36,7 @@ describe('nestedFields', () => {
   it('nested fields - initialValues', () => {
     const wrapper = mount(<TestForm />);
     const name = wrapper.find('#name');
-    const country = wrapper.find('#country__code');
+    const country = wrapper.find('[id^="country.code"]');
     expect(name).toHaveLength(1);
     expect(country).toHaveLength(1);
     expect(name.prop('value')).toEqual('My Company');
@@ -45,24 +45,24 @@ describe('nestedFields', () => {
 
   it('change nested field', () => {
     const wrapper = mount(<TestForm />);
-    const country = wrapper.find('#country__code');
+    const country = wrapper.find('[id^="country.code"]');
     expect(country).toHaveLength(1);
     country.prop('onChange')({ currentTarget: { value: 'cz' } });
     country.update();
-    expect(wrapper.find('#country__code').prop('value')).toEqual('cz');
+    expect(wrapper.find('[id^="country.code"]').prop('value')).toEqual('cz');
   });
 
   it('set nested field programmatically', () => {
     const wrapper = mount(<TestForm />);
     wrapper.find('#set-country').simulate('click');
-    const country = wrapper.find('#country__code');
+    const country = wrapper.find('[id^="country.code"]');
     expect(country).toHaveLength(1);
     expect(country.prop('value')).toEqual('cz');
   });
   it('reset nested form values', () => {
     const wrapper = mount(<TestForm />);
     wrapper.find('#set-values').simulate('click');
-    const country = wrapper.find('#country__code');
+    const country = wrapper.find('[id^="country.code"]');
     const name = wrapper.find('#name');
     expect(name).toHaveLength(1);
     expect(country).toHaveLength(1);

@@ -22,7 +22,7 @@ describe('field-utils', () => {
       expect(getFieldInputName('firstName')).toEqual('firstName');
     });
     it('should return parts for nested field', () => {
-      expect(getFieldInputName('person.firstName')).toEqual('person__firstName');
+      expect(getFieldInputName('person.firstName')).toEqual('person.firstName');
     });
   });
 
@@ -35,8 +35,8 @@ describe('field-utils', () => {
     });
     it('should return parts for nested field', () => {
       expect(setupInput('person.firstName')).toEqual({
-        id: 'person__firstName',
-        name: 'person__firstName'
+        id: 'person.firstName',
+        name: 'person.firstName'
       });
     });
   });
