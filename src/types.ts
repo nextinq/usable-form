@@ -138,6 +138,7 @@ export type UseFormResult<TValues> = {
   formValues: TValues;
   formState: FormState;
   setValues: (values: TValues) => void;
+  validate: () => void;
 };
 
 export type ErrorMapperOptions = {

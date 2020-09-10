@@ -185,7 +185,12 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
     });
   }, []);
 
+  const validate = useCallback(() => {
+    setFormErrors(formState.errors);
+  }, [formState.errors]);
+
   return {
+    validate,
     setupField,
     setupWrapper,
     formValues,
