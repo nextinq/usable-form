@@ -53,7 +53,6 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
 
   const setTouched = useCallback(
     (fieldName: string | null | undefined) => {
-      clientValidationPaused.current = false;
       if (fieldName) {
         dispatchFormState({ type: 'field-touched', payload: { fieldName } });
       }
@@ -139,6 +138,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
       if (opts.clearErrorOnBlur) {
         clearFieldError(fieldName);
       }
+      clientValidationPaused.current = false;
       setTouched(fieldName);
     },
     [formValues]
