@@ -46,10 +46,14 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   const prevInitialValues = useRef({
     ...initialValues
   });
+
+  const clientValidationPaused = useRef(false);
+
   const [formState, dispatchFormState] = useReducer(formStateReducer, initialFormState);
 
   const setTouched = useCallback(
     (fieldName: string | null | undefined) => {
+      clientValidationPaused.current = false;
       if (fieldName) {
         dispatchFormState({ type: 'field-touched', payload: { fieldName } });
       }
@@ -68,6 +72,9 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   }, [formState.touched, dispatchFormState]);
 
   useEffect(() => {
+    if (clientValidationPaused.current) {
+      return;
+    }
     const { validateForm, validationSchema } = opts;
     if (validateForm) {
       const errors = validateForm(formValues, null);
@@ -85,7 +92,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
         payload: { errors: errors || [], touchFields: false, replace: true }
       });
     }
-  }, [formValues]);
+  }, [formValues, clientValidationPaused.current]);
 
   useEffect(() => {
     if (!deepEqual(initialValues, prevInitialValues.current)) {
@@ -165,6 +172,7 @@ export function useForm<TValues>(options: UseFormOptions<TValues>): UseFormResul
   );
 
   const setFormErrors = useCallback((errors: Array<ValidationError>) => {
+    clientValidationPaused.current = true;
     dispatchFormState({
       type: 'set-form-errors',
       payload: { errors: errors || [], touchFields: true }
